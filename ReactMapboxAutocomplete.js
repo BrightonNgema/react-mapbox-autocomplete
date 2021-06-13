@@ -68,7 +68,8 @@ class ReactMapboxAutocomplete extends React.Component {
       event.target.getAttribute('data-suggestion'),
       event.target.getAttribute('data-lat'),
       event.target.getAttribute('data-lng'),
-      event.target.getAttribute('data-text')
+      event.target.getAttribute('data-text'),
+      event.target.getAttribute('data-place')
     )
   }
 
@@ -76,10 +77,6 @@ class ReactMapboxAutocomplete extends React.Component {
     return (
       <div>
         <input placeholder={ this.props.placeholder || 'Search' }
-               id={this.props.inputId}
-               onClick={this.props.inputOnClick} 
-               onBlur={this.props.inputOnBlur}
-               onFocus={this.props.inputOnFocus}
                className={this.props.inputClass ?
                           this.props.inputClass + ' react-mapbox-ac-input'
                           : 'react-mapbox-ac-input'}
@@ -101,7 +98,9 @@ class ReactMapboxAutocomplete extends React.Component {
                        data-suggestion={place.place_name}
                        data-lng={place.center[0]}
                        data-lat={place.center[1]}
-                       data-text={place.text}>
+                       data-text={place.text}
+                       dta-place={place}
+                       >
 
                     {place.place_name}
 
@@ -118,18 +117,7 @@ class ReactMapboxAutocomplete extends React.Component {
   }
 }
 
-ReactMapboxAutocomplete.defaultProps = {
-  inputId: null,
-  inputOnFocus: null,
-  inputOnBlur: null,
-  inputOnClick: null
-};
-
 ReactMapboxAutocomplete.propTypes = {
-  inputId: PropTypes.string,
-  inputOnFocus: PropTypes.func,
-  inputOnBlur: PropTypes.func,
-  inputOnClick: PropTypes.func,
   inputClass: PropTypes.string,
   publicKey: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
