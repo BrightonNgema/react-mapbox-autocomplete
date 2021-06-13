@@ -94,7 +94,7 @@ var ReactMapboxAutocomplete = function (_React$Component) {
         _this.setState({ query: event.target.getAttribute('data-suggestion') });
       }
 
-      _this.props.onSuggestionSelect(event.target.getAttribute('data-suggestion'), event.target.getAttribute('data-lat'), event.target.getAttribute('data-lng'), event.target.getAttribute('data-text'));
+      _this.props.onSuggestionSelect(event.target.getAttribute('data-suggestion'), event.target.getAttribute('data-lat'), event.target.getAttribute('data-lng'), event.target.getAttribute('data-text'),event.target.getAttribute('data-place'));
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -107,10 +107,6 @@ var ReactMapboxAutocomplete = function (_React$Component) {
         'div',
         null,
         _react2.default.createElement('input', { placeholder: this.props.placeholder || 'Search',
-          id: this.props.inputId,
-          onClick: this.props.inputOnClick,
-          onBlur: this.props.inputOnBlur,
-          onFocus: this.props.inputOnFocus,
           className: this.props.inputClass ? this.props.inputClass + ' react-mapbox-ac-input' : 'react-mapbox-ac-input',
           onChange: this._updateQuery,
           value: this.state.query,
@@ -132,8 +128,9 @@ var ReactMapboxAutocomplete = function (_React$Component) {
                   'data-suggestion': place.place_name,
                   'data-lng': place.center[0],
                   'data-lat': place.center[1],
-                  'data-text': place.text },
-                place.place_name
+                  'data-text': place.text,
+                  'data-place': place },
+                place.place_name,
               );
             }),
             this.state.error && _react2.default.createElement(
@@ -150,18 +147,7 @@ var ReactMapboxAutocomplete = function (_React$Component) {
   return ReactMapboxAutocomplete;
 }(_react2.default.Component);
 
-ReactMapboxAutocomplete.defaultProps = {
-  inputId: null,
-  inputOnFocus: null,
-  inputOnBlur: null,
-  inputOnClick: null
-};
-
 ReactMapboxAutocomplete.propTypes = {
-  inputId: _propTypes2.default.string,
-  inputOnFocus: _propTypes2.default.func,
-  inputOnBlur: _propTypes2.default.func,
-  inputOnClick: _propTypes2.default.func,
   inputClass: _propTypes2.default.string,
   publicKey: _propTypes2.default.string.isRequired,
   placeholder: _propTypes2.default.string,
